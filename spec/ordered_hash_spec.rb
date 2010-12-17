@@ -185,3 +185,44 @@ describe OrderedHash, '#inspect について' do
   end
 end
 
+describe OrderedHash, "to_s" do
+  before do
+    @oh = OrderedHash.new
+    @oh["color"] = "red"
+    @oh["font"] = "x-small"
+  end
+
+  it "should list the styles" do
+    @oh.to_s.should == "color:red;font:x-small"
+  end
+end
+
+describe OrderedHash, "split" do
+  before do
+    @oh = OrderedHash.new
+    @oh["color"] = "red"
+    @oh["font"] = "x-small"
+
+    @split_hash = @oh.split("color")
+  end
+
+  describe "split hash" do
+    it "should contain split key" do
+      @split_hash["color"].should == "red"
+    end
+    it "should not contain non-split key" do
+      @split_hash.key?("font").should == false
+    end
+  end
+
+  describe "original hash" do
+    it "should not contain split key" do
+      @oh.key?("color").should == false
+    end
+    it "should contain non-split key" do
+      @oh["font"].should == "x-small"
+    end
+  end
+
+end
+

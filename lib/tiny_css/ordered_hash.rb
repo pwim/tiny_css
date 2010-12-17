@@ -44,5 +44,27 @@ module TinyCss
       each { |k, v| ary << "#{ k.inspect }=>#{ v.inspect }" }
       "{#{ ary.join(', ') }}"
     end
+
+    def to_s
+      map { |k, v| "#{ k }:#{ v }" }.join ';'
+    end
+
+    def empty?
+      @hash.empty?
+    end
+
+    def key?(key)
+      keys.include?(key)
+    end
+
+    def split(*keys_to_split)
+      h = self.class.new
+      keys.detect {|k| keys_to_split.include?(k) }.each do |k|
+        if v = delete(k)
+          h[k] = v
+        end
+      end
+      h
+    end
   end
 end
