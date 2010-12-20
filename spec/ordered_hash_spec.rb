@@ -226,3 +226,24 @@ describe OrderedHash, "split" do
 
 end
 
+describe OrderedHash, "split out empty hash" do
+  before do
+    @oh = OrderedHash.new
+
+    @split_hash = @oh.split("color")
+  end
+
+  describe "split hash" do
+    it "should contain split key" do
+      @split_hash.key?("color").should == false
+    end
+  end
+
+  describe "original hash" do
+    it "should not contain split key" do
+      @oh.key?("color").should == false
+    end
+  end
+
+end
+

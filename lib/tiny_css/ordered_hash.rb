@@ -59,8 +59,8 @@ module TinyCss
 
     def split(*keys_to_split)
       h = self.class.new
-      keys.detect {|k| keys_to_split.include?(k) }.each do |k|
-        if v = delete(k)
+      keys.each do |k|
+        if keys_to_split.include?(k) && v = delete(k)
           h[k] = v
         end
       end
