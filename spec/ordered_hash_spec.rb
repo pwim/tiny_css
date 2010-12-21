@@ -62,6 +62,23 @@ describe OrderedHash, '#dup について' do
   end
 end
 
+describe OrderedHash, '#dup with values set' do
+  before do
+    @oh = OrderedHash.new
+    @oh["foo"] = "bar"
+    @dup = @oh.dup
+  end
+
+  describe "deleting key from dup" do
+    before do
+      @dup.delete("foo")
+    end
+    it "should still have key in original" do
+      @oh["foo"].should == "bar"
+    end
+  end
+end
+
 describe OrderedHash, '#delete について' do
   before(:each) do
     @oh = OrderedHash.new

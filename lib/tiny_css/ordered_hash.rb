@@ -30,6 +30,7 @@ module TinyCss
 
     def dup
       dup = super
+      dup.instance_variable_set(:@hash, @hash.dup)
       dup.keys = self.keys.dup
       dup
     end
