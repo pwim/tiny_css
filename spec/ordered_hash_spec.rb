@@ -247,3 +247,26 @@ describe OrderedHash, "split out empty hash" do
 
 end
 
+describe OrderedHash, "split out multiple keys" do
+  before do
+    @oh = OrderedHash.new
+    @oh["font-size"] = "medium"
+    @oh["color"] = "#ffffff"
+    @oh["text-align"] = "center"
+
+    @split_hash = @oh.split("font-size", "color")
+  end
+
+  describe "split hash" do
+    it "should contain split key" do
+      @split_hash.keys.should == %w[font-size color]
+    end
+  end
+
+  describe "original hash" do
+    it "should contain non-split key" do
+      @oh.keys.should == %w[text-align]
+    end
+  end
+
+end
